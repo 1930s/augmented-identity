@@ -112,7 +112,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.run(configuration, options: options)
     }
     
-    func getText(image: UIImage) {
+    func getText(image: UIImage) { 
         let visionImage = VisionImage(image: image)
         textRecognizer.process(visionImage) { result, error in
             guard error == nil, let result = result else {
