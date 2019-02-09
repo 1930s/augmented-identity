@@ -5,7 +5,7 @@ import sys
 app = Flask(__name__)
 
 ##user data
-userDict = {'elu2':['edward', ["LiveThesaurus: god-tier thesaurus", "https://github.com/EdwardLu2018/augmented-identity"], 'https://www.facebook.com/', 'https://www.linkedin.com/', 'https://www.pornhub.com/', ['Python', 'Handome', 'Cute', 'JavaScript', 'Excessively Intelligent']]}
+userDict = {'elu2':['Edward Lu', 'edward', ["LiveThesaurus: god-tier thesaurus", "https://github.com/EdwardLu2018/augmented-identity"], 'https://www.facebook.com/', 'https://www.linkedin.com/', 'https://www.pornhub.com/', ['Python', 'Handome', 'Cute', 'JavaScript', 'Excessively Intelligent']]}
 personalWebsite = "None"
 github = {}
 linkedIn = "None"
@@ -21,10 +21,11 @@ def index():
 # when POST method is called from register page
 @app.route("/", methods = ["POST", "GET"])
 def register():
+    fullName = request.form ['fullName']
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
-    if request.form ['button'] == "Register" and userName != "" and password != "" and password == confirm:
+    if request.form ['button'] == "Register" and fullName != "" and userName != "" and password != "" and password == confirm:
         userDict [userName] = password
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
