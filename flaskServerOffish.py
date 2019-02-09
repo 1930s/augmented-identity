@@ -35,7 +35,7 @@ def finishedRegistration():
     return render_template ("finishedRegistration.html")
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.168.24')
+    app.run(debug=True, host='128.237.173.66')
 # @app.route('/')
 # def index():
 #    return render_template('log_in.html')

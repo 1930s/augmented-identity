@@ -17,19 +17,19 @@ def index():
 # when POST method is called from website for saving links
 @app.route("/", methods = ["POST", "GET"])
 def saveData():
-    personalWebsiteLink = request.form [PersonalWebsite]
-    githubLink = request.form [Github]
-    linkedInLink = request.form [LinkedIn]
-    facebookLink = request.form [Facebook]
-    if personalWebsiteLink != "enter URL" or personalWebsiteLink != "":
+    personalWebsiteLink = request.form ["PersonalWebsite"]
+    githubLink = request.form ["Github"]
+    linkedInLink = request.form ["LinkedIn"]
+    facebookLink = request.form ["Facebook"]
+    if personalWebsiteLink != "enter URL" and personalWebsiteLink != "":
         personalWebsite = personalWebsiteLink
-    if githubLink != "enter URL" or githubLink != "":
+    if githubLink != "enter URL" and githubLink != "":
         github = githubLink
-    if linkedInLink != "enter URL" or linkedInLink != "":
+    if linkedInLink != "enter URL" and linkedInLink != "":
         linkedIn = linkedInLink
-    if facebookLink != "enter URL" or facebookLink != "":
+    if facebookLink != "enter URL" and facebookLink != "":
         facebook = facebookLink
-    print((personalWebsite, github, linkedIn, facebook), file=sys.stderr)
+    print([personalWebsite, github, linkedIn, facebook], file=sys.stderr)
     return redirect("/")
     
     
