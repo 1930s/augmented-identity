@@ -5,7 +5,7 @@ import sys
 app = Flask(__name__)
 
 ##user data
-userDict = {'jkoch': ['james']}
+userDict = {'elu2':['edward', ["LiveThesaurus: god-tier thesaurus", "https://github.com/EdwardLu2018/augmented-identity"], 'https://www.facebook.com/', 'https://www.linkedin.com/', 'https://www.pornhub.com/', ['Python', 'Handome', 'Cute', 'JavaScript', 'Excessively Intelligent']]}
 personalWebsite = "None"
 github = {}
 linkedIn = "None"
@@ -114,4 +114,3 @@ def viewData(linkedIn):
 
 if __name__ == '__main__':
     app.run(debug=True, host='128.237.173.66')
-
