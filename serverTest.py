@@ -5,9 +5,9 @@ import sys
 app = Flask(__name__)
 
 ##user data
-userDict = {'jkoch': ['james']}
+userDict = {'elu2':['edward', ["LiveThesaurus: god-tier thesaurus", "https://github.com/EdwardLu2018/augmented-identity"], 'https://www.facebook.com/', 'https://www.linkedin.com/', 'https://www.pornhub.com/', ['Python', 'Handome', 'Cute', 'JavaScript', 'Excessively Intelligent']]}
 personalWebsite = "None"
-github = []
+github = {}
 linkedIn = "None"
 facebook = "None"
 skills = "None"
@@ -21,15 +21,11 @@ def index():
 # when POST method is called from register page
 @app.route("/", methods = ["POST", "GET"])
 def register():
-    fullName = request.form ['fullName']
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
-    if request.form ['button'] == "Register" and fullName != "" and \
-                    userName != "" and password != "" and password == confirm:
-        userDict[userName] = [None, None, None, None, None, None, None]
-        userDict[userName][0] = fullName
-        userDict[userName][1] = password
+    if request.form ['button'] == "Register" and userName != "" and password != "" and password == confirm:
+        userDict [userName] = password
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
         return redirect("/loginPage")
@@ -70,11 +66,11 @@ def enterDataScreen():
 #retrieves the linkes and stores it with users
 @app.route("/enterPortfolioScreen", methods = ["POST", "GET"])
 def enterPortfolioData():
-    personalWebsite = None
-    github = None
-    linkedIn = None
-    facebook = None
-    skills = None
+    global personalWebsite
+    global github
+    #global linkedIn
+    global facebook
+    global skills
     if request.method == "POST":
         personalWebsiteLink = request.form ["PersonalWebsite"]
         githubLink = request.form ["Github"]
@@ -92,12 +88,15 @@ def enterPortfolioData():
         if skillsList != "enter your skills" and skillsList != "":
             skills = skillsList
         print([personalWebsite, github, linkedIn, facebook, skills], file=sys.stderr)
-        return render_template("ViewPortfolioData.html", result = request.form)
+        return redirect(url_for("viewData", linkedIn = linkedIn))
+    if request.method == "GET":
+        git = request.args.get('LinkedIn')
+        return redirect (url_for ("viewData", linkedIn = linkedIn))
 
 
-# @app.route("/viewData/<linkedIn>")
-# def viewData(linkedIn):
-#     return render_template("ViewPortfolioData.html", linkedIn = linkedIn)
+@app.route("/viewData/<linkedIn>")
+def viewData(linkedIn):
+    return linkedIn
     
 # 
 # @app.route("/viewData", methods=["POST", "GET"])
@@ -115,4 +114,3 @@ def enterPortfolioData():
 
 if __name__ == '__main__':
     app.run(debug=True, host='128.237.173.66')
-
