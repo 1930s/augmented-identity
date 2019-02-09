@@ -133,7 +133,7 @@ def enterPortfolioData():
         userDict[currentUser][5] = personalWebsite
         userDict[currentUser][6] = skills
         userDict[currentUser][7] = major
-        return render_template("PrettyPortfolioSummary.html", result = request.form)
+        return render_template("PrettyPortfolioSummary.html", result = tupleList(currentUser, userDict))
         
 def tupleList(user, dict):
     result = []
@@ -160,5 +160,5 @@ def editPortfolioButton():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.168.24')
+    app.run(debug=True, host='128.237.173.66')
 
