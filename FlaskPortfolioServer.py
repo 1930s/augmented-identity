@@ -24,7 +24,9 @@ def register():
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
-    if request.form ['button'] != "Or Login" and userName != "" and password != "" and password == confirm:
+    if request.method == "POST":
+        print (request.form, file = sys.stderr)
+    if request.form ['button'] == "Register" and userName != "" and password != "" and password == confirm:
         userDict [userName] = password
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
