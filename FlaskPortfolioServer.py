@@ -52,11 +52,14 @@ def register():
     
 @app.route('/tasks', methods=['POST', "GET"])
 def get():
+    global currentUser
     data = request.get_json()
     name = str(data["name"])
     for username in userDict:
         if userDict[username][0] == name:
-            return jsonify(userDict)
+            currentUser = username
+            print(jsonify(userDict), file=sys.stderr)
+            return jsonify({currentUser: userDict[currentUser]})
     return jsonify({'':['', '', ["", "",""], '', '', '', ['', '', '', '', ''], ""]})
         
 @app.route("/loginPage")
