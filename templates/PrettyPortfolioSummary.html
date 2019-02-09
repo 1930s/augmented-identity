@@ -7,7 +7,7 @@
 <body>
   <div class = "head" align = "left">
     <h2>
-      Welcome Username
+      Welcome!
     </h2>
   </div>
   <div class = "side">
@@ -25,6 +25,23 @@
 
   </div>
 
+
+{% for key, value in result%}
+<table border = 1 class = "table">
+            <tr class = "row">
+               <th class = "head"> {{ key }} </th>
+               <td class = "val"> {{ value }} </td>
+            </tr>
+         {% endfor %}
+</table>
+
+
+  <script >
+  console.log (document.getElementsByClassName ("row")[1].outerText);
+
+</script>
+
+
   <div class = "smallBody">
 
     <div class = "profileTab post">
@@ -32,7 +49,9 @@
       <img src=
       "https://s3-ap-southeast-1.amazonaws.com/images.humanresourcesonline.net/wp-content/uploads/2014/12/AkankashaD-Dec2014-Skills-Shutterstock.jpg" style="width:300px">
       <br><br>
-      <p>[Not Added]</p>
+
+      <p id = "skills">[Not Added]</p>
+
     </div>
 
     <div class ="Github post">
@@ -41,7 +60,7 @@
       <img src = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"style="width:200px;
        position: relative; left: 50px;">
      </a>
-      <p>[Not Added]</p>
+      <p id = "github">[Not Added]</p>
     </div>
   
   </div>
@@ -55,17 +74,17 @@
       "https://pngimg.com/uploads/linkedIn/linkedIn_PNG38.png" style="width:200px; position:relative; left:50px;align-self:center; top: 0px;">
     </a>
       <br>
-      <p>[Not Added]</p>
+      <p id = "linkedIn">[Not Added]</p>
     </div>
 
     <div class = "Portfolio post"> 
-      <h1>Personal Porfolio</h1>
+      <h1>Personal Portfolio</h1>
       <br>
       <a href = "https://www.blogger.com/about/?r=1-null_user">
       <img src = "https://assets.pcmag.com/media/images/435450-how-to-build-a-website.jpg" style = "width:300px;  position:relative;">
     </a>
       <br><br>
-       <p>[Not Added]</p>
+       <p id = "personal">[Not Added]</p>
 
     </div>
 
@@ -79,10 +98,24 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/600px-Facebook_logo_%28square%29.png"style = "width:150px;  position:relative; left:80px;top:30px">
     </a>
       <br><br><br><br>
-      <p>[Not Added]</p>
+      <p id = "facebook">[Not Added]</p>
     </div>
   
   </div>
+
+
+
+
+
+
+<script>
+  document.getElementById ("personal").innerHTML = document.getElementsByClassName ("row")[3].outerText;
+  document.getElementById ("github").innerHTML = document.getElementsByClassName ("row")[0].outerText;
+  document.getElementById ("linkedIn").innerHTML = document.getElementsByClassName ("row")[2].outerText;
+  document.getElementById ("facebook").innerHTML = document.getElementsByClassName ("row")[1].outerText;
+  document.getElementById ("skills").innerHTML = document.getElementsByClassName ("row")[4].outerText;
+</script>
+
 
 </body>
 </html>

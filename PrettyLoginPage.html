@@ -1,7 +1,7 @@
 <html>
 <header>
 	<title>
-		Augmented Identity
+		Augmented Identity LOL
 	</title>
 </header>
 
@@ -17,13 +17,13 @@
 
 	<div class = "back" id = "back">
 		<div class = "loginbox" style="font-family:Arial; font-style:italic;width:350px;height:450px;border:1px solid #e0e0e0; background-color: #f3f3f3" align = "center"> 
-			<img src="./static/logo.png" style="width:300px">
+			<img src="logo.png" style="width:300px">
 
-			<form align = "center" method="POST"style="position:relative;top:-50px;font-family:Arial; font-style:italic;">
-				<input type="text" name="username" value = "Username"><br>
-				<input type="text" name="password" value = "Password"><br>
+			<form align = "center"style="position:relative;top:-50px;font-family:Arial; font-style:italic;">
+				<input type="text" id="user" value = "Username"><br>
+				<input type="text" id="pass" value = "Password"><br>
 				<br>
-				<input type = "submit" value = "Login">
+				<button onclick="userData" value="Submit"> Log In!</button>
 			</form>
 		</div>
 	</div>
@@ -162,8 +162,5 @@ border: none !important;
 	color: black;
 }
 
-.topnav a.active {
-	background-color: #626263;
-	color: white;
-}
+
 </style>

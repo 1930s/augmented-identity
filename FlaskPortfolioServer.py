@@ -1,11 +1,19 @@
 from __future__ import print_function
 from flask import Flask, request, redirect, url_for, render_template, Response, jsonify
 import sys
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
+from bs4 import BeautifulSoup
+
+import urllib.request
+from selenium import webdriver
+from webscrapeTest import *
 
 app = Flask(__name__)
 
 ##user data
-userDict = {'jkoch': ['james']}
+userDict = {}
 currentUser = None
 personalWebsite = "None"
 github = []
@@ -31,17 +39,28 @@ def register():
     confirm = request.form ['confirmPass']
     if request.form ['button'] == "Register" and fullName != "" and \
                     userName != "" and password != "" and password == confirm:
-        userDict[userName] = [None, None, None, None, None, None, None, None]
+        userDict[userName] = ['', '', ['', '', ''], '', '', '', ['', '', '', '', ''], '']
         userDict[userName][0] = fullName
         userDict[userName][1] = password
         currentUser = userName
-        
         print(userDict, file=sys.stderr)
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
         return redirect("/loginPage")
     else:
         return redirect ("/")
+    
+@app.route('/tasks', methods=['POST', "GET"])
+def get():
+    global currentUser
+    data = request.get_json()
+    name = str(data["name"])
+    for username in userDict:
+        if userDict[username][0] == name:
+            currentUser = username
+            print(jsonify(userDict), file=sys.stderr)
+            return jsonify({currentUser: userDict[currentUser]})
+    return jsonify({'':['', '', ["", "",""], '', '', '', ['', '', '', '', ''], ""]})
         
 @app.route("/loginPage")
 def loginTemplate():
@@ -86,12 +105,14 @@ def enterPortfolioData():
     facebook = None
     skills = None
     major = None
+    global currentUser
+    global userDict
     if request.method == "POST":
         personalWebsiteLink = request.form ["PersonalWebsite"]
         githubLink = request.form ["Github"]
         linkedInLink = request.form ["LinkedIn"]
         facebookLink = request.form ["Facebook"]
-        skillsList = request.form ["Skills"]
+        skillsList = request.form ["Skills"].split(", ")
         tmpMajor = request.form ["Major"]
         if personalWebsiteLink != "enter URL" and personalWebsiteLink != "":
             personalWebsite = personalWebsiteLink
@@ -106,7 +127,20 @@ def enterPortfolioData():
         if tmpMajor != "enter your major" and tmpMajor != "":
             major = tmpMajor
         print(request.form, file=sys.stderr)
-        return render_template("PrettyPortfolioSummary.html", result = request.form)
+        gitInfo = getDetails (github)
+        if gitInfo == None:
+            userDict[currentUser][2][0] = 'None'
+            userDict[currentUser][2][1] = 'None'
+        else:
+            userDict[currentUser][2][0] = gitInfo[0]
+            userDict[currentUser][2][1] = gitInfo[1]
+        userDict[currentUser][2][2] = github
+        userDict[currentUser][3] = facebook
+        userDict[currentUser][4] = linkedIn
+        userDict[currentUser][5] = personalWebsite
+        userDict[currentUser][6] = skills
+        userDict[currentUser][7] = major
+        return render_template("PrettyPortfolioSummary.html", result = tupleList(currentUser, userDict))
         
 def tupleList(user, dict):
     result = []
