@@ -8,13 +8,14 @@
 <body bgcolor = "#fff">
 
 	<div class="topnav">
-		<a class="active" href="#home">Login</a>
+		<a class="active" href="#home">Home</a>
 		<a href="#news">News</a>
+		<a href="#contact">Contact</a>
 		<a href="#about">About</a>
 	</div>
 
 
-	<div class = "back" id = "back">
+	<div class = "back">
 		<div class = "loginbox" style="width:350px;height:450px;border:1px solid #e0e0e0; background-color: #fff" align = "center"> 
 			<br><br>
 			<h1>Insert Cool Logo</h1>
@@ -27,13 +28,6 @@
 			</form>
 		</div>
 	</div>
-<!-- 	<div class="w3-content w3-display-container">
-		<img class="mySlides" src="https://www.birdlife.org/sites/default/files/styles/full_1140x550/public/news/european_turtle_dove_streptopelia_turtur_websitec_revital_salomon.jpg?itok=mM6bFaSU">
-		<img class="mySlides" src="https://content.presspage.com/uploads/1763/1920_year-of-the-bird-george-grall.jpg?10000">
-		<img class="mySlides" src="https://www.sciencemag.org/sites/default/files/styles/inline__450w__no_aspect/public/bird_16x9_3.jpg?itok=JTzBFet">
-	</div>
- -->
-
 	<div class = "bottom">
 	</div>
 
@@ -50,38 +44,6 @@
 		var user = document.getElementbyID("user");
 		var pass = document.getElementbyID("pass");
 	}
-
-	var fadeinto = true;
-	var slideIndex = 0;
-	carousel();
-
-	function carousel() {
-		var back = document.getElementById("back");
-		slideIndex++;
-
-		
-		if (slideIndex == 1){
-			// alert(1);
-			back.style.backgroundImage = "url('https://content.presspage.com/uploads/1763/1920_year-of-the-bird-george-grall.jpg?10000')";
-			// fadeout();
-		}
-		else if (slideIndex==2){
-			// alert(2);
-			
-			back.style.backgroundImage = "url('https://www.sciencemag.org/sites/default/files/styles/inline__450w__no_aspect/public/bird_16x9_3.jpg?itok=JTzBFet')";
-		}
-		else if (slideIndex==3){
-			// alert(3);
-		
-			back.style.backgroundImage = "url('https://files.allaboutbirds.net/wp-content/uploads/2015/06/prow-featured.jpg')";
-			slideIndex = 0;
-		}
-		 setTimeout(carousel, 2000); 
- // Change image every 2 seconds
-}
-
-
-
 </script>
 
 <style>
@@ -93,31 +55,13 @@ div.back {
 	position:relative;
 	height:600px;
 
-	background-image: url("https://www.birdlife.org/sites/default/files/styles/full_1140x550/public/news/");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	
-	margin:-7px;
-
-	 -webkit-transition: background 300ms ease-in 200ms; /* property duration timing-function delay */
-    -moz-transition: background 300ms ease-in 200ms;
-    -o-transition: background 300ms ease-in 200ms;
-    transition: background 300ms ease-in 200ms;
-
-}
-
-div.w3-display-container{
-	border: none !important;
-	position:relative;
-	height:600px;
-
 	background-image: url("http://www.zorbital.net/wp-content/uploads/2018/11/image.networking-hero.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 	
 	margin:-7px;
+
 }
 
 div.loginbox{
