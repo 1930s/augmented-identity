@@ -8,17 +8,25 @@ userDict = {}
 #initial render
 @app.route('/')
 def index():
-    print (url_for ("finishedRegistration"))
-    return render_template ("registerPage.html")
+    return render_template ("registerPageOffish.html", alert = "")
     
 # when POST method is called from website
 @app.route("/", methods = ["POST", "GET"])
 def register():
-    result = request.form
-    userDict.update(result)
-    print(userDict, file=sys.stderr)
-    return redirect("/finishedRegistration")
-    
+    userName = request.form ['user']
+    password = request.form ['pass']
+    confirm = request.form ['confirmPass']
+    print (userName, file = sys.stderr)
+    print (password, file = sys.stderr)
+    print (confirm, file = sys.stderr)
+    if userName != "" and password != "" and password == confirm:
+        userDict [userName] = password
+        print(userDict, file=sys.stderr)
+        return redirect("/finishedRegistration")
+    else:
+        alert = "hey you suck"
+        return redirect ("/", alert = alert)
+        
 
 @app.route("/finishedRegistration")
 def finishedRegistration():
