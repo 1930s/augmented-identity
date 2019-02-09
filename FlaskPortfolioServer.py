@@ -125,8 +125,12 @@ def enterPortfolioData():
             major = tmpMajor
         print(request.form, file=sys.stderr)
         gitInfo = getDetails (github)
-        userDict[currentUser][2][0] = gitInfo[0]
-        userDict[currentUser][2][1] = gitInfo[1]
+        if gitInfo == None:
+            userDict[currentUser][2][0] = 'None'
+            userDict[currentUser][2][1] = 'None'
+        else:
+            userDict[currentUser][2][0] = gitInfo[0]
+            userDict[currentUser][2][1] = gitInfo[1]
         userDict[currentUser][2][2] = github
         userDict[currentUser][3] = facebook
         userDict[currentUser][4] = linkedIn
