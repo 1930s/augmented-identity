@@ -66,11 +66,11 @@ def enterDataScreen():
 #retrieves the linkes and stores it with users
 @app.route("/enterPortfolioScreen", methods = ["POST", "GET"])
 def enterPortfolioData():
-    global personalWebsite
-    global github
-    #global linkedIn
-    global facebook
-    global skills
+    personalWebsite = None
+    github = None
+    linkedIn = None
+    facebook = None
+    skills = None
     if request.method == "POST":
         personalWebsiteLink = request.form ["PersonalWebsite"]
         githubLink = request.form ["Github"]
@@ -88,15 +88,12 @@ def enterPortfolioData():
         if skillsList != "enter your skills" and skillsList != "":
             skills = skillsList
         print([personalWebsite, github, linkedIn, facebook, skills], file=sys.stderr)
-        return redirect(url_for("viewData", linkedIn = linkedIn))
-    if request.method == "GET":
-        git = request.args.get('LinkedIn')
-        return redirect (url_for ("viewData", linkedIn = linkedIn))
+        return render_template("ViewPortfolioData.html", result = request.form)
 
 
-@app.route("/viewData/<linkedIn>")
-def viewData(linkedIn):
-    return linkedIn
+# @app.route("/viewData/<linkedIn>")
+# def viewData(linkedIn):
+#     return render_template("ViewPortfolioData.html", linkedIn = linkedIn)
     
 # 
 # @app.route("/viewData", methods=["POST", "GET"])
