@@ -7,17 +7,65 @@
 	</title>
 </head>
 <body>
+ 
+
+
+
+  <img src="../static/logo.png" style ="width: 400px; height:400px; position:relative; left:300px; top:160px">
+  <div>
 <center>
-	<form method = "POST" >
-    Full name: <input type="text" name="fullName"><br>
-  	Username: <input type="text" name="user"><br>
+  <h1 style="position:relative; top: 40px">Create An Account</h1>
+	<form method = "POST" style="position:relative; top: 40px">
+    <input type="text" name="fullName" value = "Full Name"><br>
+  	<input type="text" name="user" value = Username><br>
   	Password: <input type="password" name="pass"><br>
   	Confirm Password: <input type="password" name="confirmPass"><br>
   	<input type = "submit" name = 'button' value = "Register" >
-  	<input type = "submit"  name = 'button' value = "Or Login">
+    <h4>or<h4>
+  	<h2> Returning member?</h2> <input type = "submit"  name = 'button' value = "Login">
   	</form>
 </center>
+</div>
 
 </body>
 
 </html>
+
+<style>
+
+div {
+  background-color: #f3f3f3;
+  width: 400px;
+  height: 400px;
+  top: -265px;
+position:relative;
+margin:0 auto;
+left: 250px;
+  align-items: center;
+
+  -moz-box-shadow: 0 0 3px #000;
+  -webkit-box-shadow: 0 0 3px #000;
+  box-shadow: 0 0 3px #000;
+}
+body{
+
+  background-color: #364b63;
+}
+
+img{
+
+    -moz-box-shadow: 0 0 3px #000;
+  -webkit-box-shadow: 0 0 3px #000;
+  box-shadow: 0 0 3px #000;
+}
+
+.triangle-topleft {
+  width: 0;
+  height: 0;
+  background-color: #fff
+  border-top: 0px solid transparent;
+  border-left: 50px solid #555;
+  border-bottom: 25px solid transparent;
+}
+
+</style>
