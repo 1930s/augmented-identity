@@ -31,7 +31,7 @@ def register():
     confirm = request.form ['confirmPass']
     if request.form ['button'] == "Register" and fullName != "" and \
                     userName != "" and password != "" and password == confirm:
-        userDict[userName] = [None, None, None, None, None, None, None, None]
+        userDict[userName] = [None, None, [None, None, None], None, None, None, None, None]
         userDict[userName][0] = fullName
         userDict[userName][1] = password
         currentUser = userName
@@ -86,6 +86,9 @@ def enterPortfolioData():
     facebook = None
     skills = None
     major = None
+    global currentUser
+    global userDict
+    print (currentUser, file = sys.stderr)
     if request.method == "POST":
         personalWebsiteLink = request.form ["PersonalWebsite"]
         githubLink = request.form ["Github"]
@@ -105,8 +108,15 @@ def enterPortfolioData():
             skills = skillsList
         if tmpMajor != "enter your major" and tmpMajor != "":
             major = tmpMajor
+        print (userDict [currentUser], file = sys.stderr)
+        userDict[currentUser][2][2] = github
+        userDict[currentUser][3] = facebook
+        userDict[currentUser][4] = linkedIn
+        userDict[currentUser][5] = personalWebsite
+        userDict[currentUser][6] = skills
+        userDict[currentUser][7] = major
         print(request.form, file=sys.stderr)
-        return render_template("PrettyPortfolioSummary.html", result = request.form)
+        return render_template("PrettyPortfolioSummary.html", result = tupleList(currentUser, userDict))
         
 def tupleList(user, dict):
     result = []
@@ -133,5 +143,5 @@ def editPortfolioButton():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.173.66')
+    app.run(debug=True, host='128.237.168.24')
 

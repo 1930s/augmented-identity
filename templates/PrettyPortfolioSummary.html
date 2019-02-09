@@ -24,6 +24,23 @@
     </ul>
 
   </div>
+  <script>
+var x = document.createElement("VAR");
+</script>
+
+{% for key, value in result%}
+<table border = 1 class = "table">
+            <tr class = "row">
+               <th class = "head"> {{ key }} </th>
+               <td class = "val"> {{ value }} </td>
+            </tr>
+         {% endfor %}
+</table>
+
+
+  <script >
+  console.log (document.getElementsByClassName ("table")[0].length);
+</script>
 
   <div class = "smallBody">
 
