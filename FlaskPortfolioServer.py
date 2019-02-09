@@ -5,7 +5,7 @@ import sys
 app = Flask(__name__)
 
 ##user data
-userDict = {'jkoch': ['james']}
+userDict = {}
 currentUser = None
 personalWebsite = "None"
 github = []
@@ -31,17 +31,25 @@ def register():
     confirm = request.form ['confirmPass']
     if request.form ['button'] == "Register" and fullName != "" and \
                     userName != "" and password != "" and password == confirm:
-        userDict[userName] = [None, None, None, None, None, None, None, None]
+        userDict[userName] = ['', '', ['', '', ''], '', '', '', ['', '', '', '', ''], '']
         userDict[userName][0] = fullName
         userDict[userName][1] = password
         currentUser = userName
-        
         print(userDict, file=sys.stderr)
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
         return redirect("/loginPage")
     else:
         return redirect ("/")
+    
+@app.route('/tasks', methods=['POST', "GET"])
+def get():
+    data = request.get_json()
+    name = str(data["name"])
+    for username in userDict:
+        if userDict[username][0] == name:
+            return jsonify(userDict)
+    return jsonify({'':['', '', ["", "",""], '', '', '', ['', '', '', '', ''], ""]})
         
 @app.route("/loginPage")
 def loginTemplate():
@@ -86,6 +94,8 @@ def enterPortfolioData():
     facebook = None
     skills = None
     major = None
+    global currentUser
+    global userDict
     if request.method == "POST":
         personalWebsiteLink = request.form ["PersonalWebsite"]
         githubLink = request.form ["Github"]
@@ -106,6 +116,12 @@ def enterPortfolioData():
         if tmpMajor != "enter your major" and tmpMajor != "":
             major = tmpMajor
         print(request.form, file=sys.stderr)
+        userDict[currentUser][2][2] = github
+        userDict[currentUser][3] = facebook
+        userDict[currentUser][4] = linkedIn
+        userDict[currentUser][5] = personalWebsite
+        userDict[currentUser][6] = skills
+        userDict[currentUser][7] = major
         return render_template("PrettyPortfolioSummary.html", result = request.form)
         
 def tupleList(user, dict):
