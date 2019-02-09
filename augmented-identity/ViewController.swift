@@ -10,6 +10,7 @@ import UIKit
 import ARKit
 import SpriteKit
 import Foundation
+import Firebase
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
@@ -117,7 +118,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     let name = result.text[lowerRange.upperBound...upperRange.lowerBound]
                     self.name = String(name)
                     self.foundCard = true
-                    self.directions.text = "Name Recognized!"
+                    self.directionsLabel.text = "Name Recognized!"
                 }
             }
         }
