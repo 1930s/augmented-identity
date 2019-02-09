@@ -15,12 +15,14 @@ import Foundation
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var directions: UILabel!
     
     let textRecognizer = Vision.vision().onDeviceTextRecognizer()
     var imageFromArkitScene: UIImage?
     let spriteKitScene: SKScene = SKScene(fileNamed: "card-info")!
     var foundCard: Bool = false
-    var name: String = ""
+    var foundAnchor: Bool = false
+    var name: String = "[name]"
     
     let fadeDuration: TimeInterval = 1
     let waitDuration: TimeInterval = 1
@@ -41,11 +43,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.directions.center.x  -= view.bounds.width
         
         sceneView.delegate = self
         sceneView.session.delegate = self
 
         configureLighting()
+        
+        UIView.animate(withDuration: 2.5) {
+            self.directions.center.x += self.view.bounds.width
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +70,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.automaticallyUpdatesLighting = true
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         guard let imageAnchor = anchor as? ARImageAnchor else { return }
         let referenceImage = imageAnchor.referenceImage
+         self.foundAnchor = true
+        
+        if let nameLabel = spriteKitScene.childNode(withName: "name") as? SKLabelNode {
+            nameLabel.text = self.name
+        }
+        
+        if let descripLabel = spriteKitScene.childNode(withName: "description") as? SKLabelNode {
+            descripLabel.text = "Identity Card"
+        }
         
         let infoPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height)
         infoPlane.cornerRadius = infoPlane.width / 25
@@ -84,20 +100,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         node.addChildNode(infoPlaneNode)
     }
     
-//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-//        if (!self.foundCard) {
-//            let imageFromArkitScene: UIImage? = sceneView.snapshot()
-//            self.getText(image: imageFromArkitScene!)
-//        }
-//
-//        if let nameLabel = spriteKitScene.childNode(withName: "name") as? SKLabelNode {
-//            nameLabel.text = self.name
-//        }
-//        if let descripLabel = spriteKitScene.childNode(withName: "description") as? SKLabelNode {
-//            descripLabel.text = "Identity Card"
-//        }
-//    }
-    
     func resetTrackingConfiguration() {
         let configuration = ARImageTrackingConfiguration()
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else { return }
@@ -111,32 +113,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         textRecognizer.process(visionImage) { result, error in
             guard error == nil, let result = result else { return }
             
-//            for block in result.blocks {
-//                for line in block.lines {
-//                    print(line.text)
-//                }
-//            }
-            if (result.text.contains("University") || result.text.contains("Student") || result.text.contains("UserID")){
-                self.foundCard = true
+            if (result.text.contains("University") || result.text.contains("Student") || result.text.contains("UserID")) {
                 if let lowerRange = result.text.range(of: "University"),
                    let upperRange = result.text.range(of: " Student") {
                     let name = result.text[lowerRange.upperBound...upperRange.lowerBound]
                     self.name = String(name)
-                    print(self.name)
+                    self.foundCard = true
+                    self.directions.text = "Name Recognized!"
                 }
             }
         }
     }
     
-    @IBAction func longPress(_ sender: Any) {
-        let imageFromArkitScene: UIImage? = sceneView.snapshot()
-        self.getText(image: imageFromArkitScene!)
-        
-        if let nameLabel = spriteKitScene.childNode(withName: "name") as? SKLabelNode {
-            nameLabel.text = self.name
+    @IBAction func longPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            self.directions.text = "Scanning..."
+            if (self.foundAnchor){
+                self.foundCard = false
+                let imageFromArkitScene: UIImage? = sceneView.snapshot()
+                self.getText(image: imageFromArkitScene!)
+            }
         }
-        if let descripLabel = spriteKitScene.childNode(withName: "description") as? SKLabelNode {
-            descripLabel.text = "Identity Card"
+        if gestureRecognizer.state == .ended {
+            self.directions.text = "Hold ID In Front Of Camera & Press"
         }
     }
 }
