@@ -84,19 +84,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         node.addChildNode(infoPlaneNode)
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        if (!self.foundCard) {
-            let imageFromArkitScene: UIImage? = sceneView.snapshot()
-            self.getText(image: imageFromArkitScene!)
-        }
-        
-        if let nameLabel = spriteKitScene.childNode(withName: "name") as? SKLabelNode {
-            nameLabel.text = self.name
-        }
-        if let descripLabel = spriteKitScene.childNode(withName: "description") as? SKLabelNode {
-            descripLabel.text = "Identity Card"
-        }
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//        if (!self.foundCard) {
+//            let imageFromArkitScene: UIImage? = sceneView.snapshot()
+//            self.getText(image: imageFromArkitScene!)
+//        }
+//
+//        if let nameLabel = spriteKitScene.childNode(withName: "name") as? SKLabelNode {
+//            nameLabel.text = self.name
+//        }
+//        if let descripLabel = spriteKitScene.childNode(withName: "description") as? SKLabelNode {
+//            descripLabel.text = "Identity Card"
+//        }
+//    }
     
     func resetTrackingConfiguration() {
         let configuration = ARImageTrackingConfiguration()
@@ -109,10 +109,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func getText(image: UIImage) {
         let visionImage = VisionImage(image: image)
         textRecognizer.process(visionImage) { result, error in
-            guard error == nil, let result = result else {
-                print("---------------ERROR---------------")
-                return
-            }
+            guard error == nil, let result = result else { return }
             
 //            for block in result.blocks {
 //                for line in block.lines {
@@ -130,8 +127,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
         }
     }
-    @IBAction func refresh(_ sender: Any) {
-        self.foundCard = false
-        self.name = "[name]"
+    
+    @IBAction func longPress(_ sender: Any) {
+        let imageFromArkitScene: UIImage? = sceneView.snapshot()
+        self.getText(image: imageFromArkitScene!)
+        
+        if let nameLabel = spriteKitScene.childNode(withName: "name") as? SKLabelNode {
+            nameLabel.text = self.name
+        }
+        if let descripLabel = spriteKitScene.childNode(withName: "description") as? SKLabelNode {
+            descripLabel.text = "Identity Card"
+        }
     }
 }
