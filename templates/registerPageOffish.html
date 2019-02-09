@@ -9,12 +9,15 @@
 <body>
 <center>
 	<form method = "POST" >
-  	Username: <input type="text" id="user"><br>
-  	Password: <input type="text" id="pass"><br>
-  	Confirm Password: <input type="text" id="confirmPass"><br>
+  	Username: <input type="text" name="user"><br>
+  	Password: <input type="password" name="pass"><br>
+  	Confirm Password: <input type="password" name="confirmPass"><br>
   	<input type = "submit">
   	</form>
 </center>
+
+<div id = "errorMsg"> {{alert}} </div>
+
 
 </body>
 
