@@ -20,6 +20,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var imageFromArkitScene: UIImage?
     var foundCard: Bool = false
     let spriteKitScene: SKScene = SKScene(fileNamed: "card-info")!
+    var name: String = ""
+    var num: String = ""
     
     let fadeDuration: TimeInterval = 1
     let waitDuration: TimeInterval = 1
@@ -81,22 +83,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         infoPlaneNode.runAction(self.fadeInAction)
 
         node.addChildNode(infoPlaneNode)
-        
-        if (!self.foundCard){
-            let imageFromArkitScene:UIImage? = sceneView.snapshot()
-            self.getText(image: imageFromArkitScene!)
-        }
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if (!self.foundCard) {
-            print(!self.foundCard)
-            let imageFromArkitScene:UIImage? = sceneView.snapshot()
+            let imageFromArkitScene: UIImage? = sceneView.snapshot()
             self.getText(image: imageFromArkitScene!)
         }
         else {
             if let nameLabel = spriteKitScene.childNode(withName: "name") as? SKLabelNode {
-                nameLabel.text = "Edward Lu"
+                nameLabel.text = self.name
             }
             if let descripLabel = spriteKitScene.childNode(withName: "description") as? SKLabelNode {
                 descripLabel.text = "Identity Card"
@@ -112,7 +108,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.session.run(configuration, options: options)
     }
     
-    func getText(image: UIImage) { 
+    func getText(image: UIImage) {
         let visionImage = VisionImage(image: image)
         textRecognizer.process(visionImage) { result, error in
             guard error == nil, let result = result else {
@@ -125,10 +121,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 //                    print(line.text)
 //                }
 //            }
-            print(result.text)
             if (result.text.contains("University") || result.text.contains("Student") || result.text.contains("UserID")){
                 self.foundCard = true
-                print(result.text)
+                if let lowerRange = result.text.range(of: "University"),
+                   let upperRange = result.text.range(of: " Student") {
+                    let name = result.text[lowerRange.upperBound...upperRange.lowerBound]
+                    self.name = String(name)
+                    print(self.name)
+                }
             }
         }
     }
