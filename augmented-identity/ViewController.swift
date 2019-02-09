@@ -40,8 +40,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var foundCard: Bool = false
     var foundAnchor: Bool = false
-    var name: String = "[name]"
-    var major: String = "[major]"
+    var name: String = "Press And Hold"
+    var major: String = "To Scan Card"
     
     var skill1: String = ""
     var skill2: String = ""
