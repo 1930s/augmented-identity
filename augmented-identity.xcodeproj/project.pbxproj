@@ -15,6 +15,10 @@
 		2BEE615C220EC08800321E18 /* card-info.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE615B220EC08800321E18 /* card-info.sks */; };
 		2BEE615E220EC49B00321E18 /* HTTPRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEE615D220EC49B00321E18 /* HTTPRequests.swift */; };
 		2BEE6162220EC69E00321E18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6161220EC69E00321E18 /* GoogleService-Info.plist */; };
+		2BEE6164220ED97800321E18 /* github.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6163220ED97800321E18 /* github.sks */; };
+		2BEE6166220EDFF000321E18 /* facebook.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6165220EDFF000321E18 /* facebook.sks */; };
+		2BEE6168220EE1E500321E18 /* linkedIn.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6167220EE1E500321E18 /* linkedIn.sks */; };
+		2BEE616A220EE40700321E18 /* personal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6169220EE40700321E18 /* personal.sks */; };
 		C5B52184AB570212E776DBAE /* Pods_augmented_identity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE34B3771FD7E7978C98757 /* Pods_augmented_identity.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +34,10 @@
 		2BEE615B220EC08800321E18 /* card-info.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "card-info.sks"; sourceTree = "<group>"; };
 		2BEE615D220EC49B00321E18 /* HTTPRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequests.swift; sourceTree = "<group>"; };
 		2BEE6161220EC69E00321E18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2BEE6163220ED97800321E18 /* github.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = github.sks; sourceTree = "<group>"; };
+		2BEE6165220EDFF000321E18 /* facebook.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = facebook.sks; sourceTree = "<group>"; };
+		2BEE6167220EE1E500321E18 /* linkedIn.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = linkedIn.sks; sourceTree = "<group>"; };
+		2BEE6169220EE40700321E18 /* personal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = personal.sks; sourceTree = "<group>"; };
 		6CE34B3771FD7E7978C98757 /* Pods_augmented_identity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_augmented_identity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB8D8530FF6D5E162BEBAF5D /* Pods-augmented-identity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-augmented-identity.release.xcconfig"; path = "Pods/Target Support Files/Pods-augmented-identity/Pods-augmented-identity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +88,10 @@
 				2BEE614B220EBF5B00321E18 /* ViewController.swift */,
 				2BEE615D220EC49B00321E18 /* HTTPRequests.swift */,
 				2BEE615B220EC08800321E18 /* card-info.sks */,
+				2BEE6163220ED97800321E18 /* github.sks */,
+				2BEE6165220EDFF000321E18 /* facebook.sks */,
+				2BEE6167220EE1E500321E18 /* linkedIn.sks */,
+				2BEE6169220EE40700321E18 /* personal.sks */,
 				2BEE614D220EBF5B00321E18 /* Main.storyboard */,
 				2BEE6150220EBF5E00321E18 /* Assets.xcassets */,
 				2BEE6152220EBF5E00321E18 /* LaunchScreen.storyboard */,
@@ -158,10 +170,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BEE6166220EDFF000321E18 /* facebook.sks in Resources */,
+				2BEE6168220EE1E500321E18 /* linkedIn.sks in Resources */,
+				2BEE6164220ED97800321E18 /* github.sks in Resources */,
 				2BEE6154220EBF5E00321E18 /* LaunchScreen.storyboard in Resources */,
 				2BEE6151220EBF5E00321E18 /* Assets.xcassets in Resources */,
 				2BEE6162220EC69E00321E18 /* GoogleService-Info.plist in Resources */,
 				2BEE614F220EBF5B00321E18 /* Main.storyboard in Resources */,
+				2BEE616A220EE40700321E18 /* personal.sks in Resources */,
 				2BEE615C220EC08800321E18 /* card-info.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
