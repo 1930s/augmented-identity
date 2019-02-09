@@ -21,13 +21,32 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ita-2U-a4c">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </arscnView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ag9-ly-iqp">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="2ak-c7-f4H"/>
+                                    <constraint firstAttribute="height" constant="44" id="nmX-pq-B8a"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="IHP-Ak-NME"/>
+                                    <barButtonItem systemItem="refresh" id="dm7-2k-1bJ">
+                                        <connections>
+                                            <action selector="refresh:" destination="BYZ-38-t0r" id="tZL-cf-4kX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="vPn-sk-qDp"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="03U-Ai-dcF"/>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="98i-ms-wHy"/>
+                            <constraint firstItem="Ag9-ly-iqp" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="GR9-ct-K9a"/>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="I6h-wS-66s"/>
+                            <constraint firstItem="Ag9-ly-iqp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eg2-5H-eGD"/>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qkb-Ir-342"/>
+                            <constraint firstItem="Ag9-ly-iqp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="zAI-1Y-FWK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
