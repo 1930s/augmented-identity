@@ -18,10 +18,10 @@ def register():
     print(userDict, file=sys.stderr)
     return render_template("finishedRegistration.html")
 
-# @app.route("/finishedRegistration", methods=["GET", "POST"])
-# def finishedRegistration():
-#     data = request.get_json()
-#     return render_template("EnterPortfolioInfo.html")
+@app.route("/finishedRegistration", methods=["GET", "POST"])
+def finishedRegistration():
+    data = request.get_json()
+    return render_template("EnterPortfolioInfo.html")
 
 if __name__ == '__main__':
     app.run(debug=True, host='128.237.173.66')
