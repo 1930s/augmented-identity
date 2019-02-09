@@ -20,20 +20,25 @@
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eF2-a4-hCw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="pDH-SS-sNo" appends="YES" id="Zzs-25-xPz"/>
+                                    <outletCollection property="gestureRecognizers" destination="2rh-Lk-aIR" appends="YES" id="16j-lU-JPw"/>
+                                </connections>
                             </arscnView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold ID In Front Of Camera &amp; Press" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSa-DS-IYv">
-                                <rect key="frame" x="12" y="35" width="351" height="25"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold ID In Front Of Camera &amp; Press" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSa-DS-IYv">
+                                <rect key="frame" x="12" y="35" width="350" height="24"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="4kx-De-Efk"/>
-                                    <constraint firstAttribute="height" constant="25" id="MoL-a1-yHv"/>
+                                    <constraint firstAttribute="height" constant="24" id="g4M-HR-Pjx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
+                                        <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -42,7 +47,6 @@
                         <constraints>
                             <constraint firstItem="eF2-a4-hCw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5D5-hd-m8F"/>
                             <constraint firstItem="eF2-a4-hCw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7KD-qF-HB9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jSa-DS-IYv" secondAttribute="trailing" constant="12" id="R8Z-Hz-eiv"/>
                             <constraint firstItem="eF2-a4-hCw" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Zrp-Fk-0Fo"/>
                             <constraint firstItem="jSa-DS-IYv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="cIx-68-iyY"/>
                             <constraint firstItem="eF2-a4-hCw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gL9-EB-ddQ"/>
@@ -56,6 +60,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="2rh-Lk-aIR">
+                    <connections>
+                        <action selector="longPress:" destination="BYZ-38-t0r" id="wr2-7a-7aU"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="pDH-SS-sNo"/>
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="133.5832083958021"/>
         </scene>

@@ -82,7 +82,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             descripLabel.text = "Identity Card"
         }
         
-        let infoPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height)
+        let infoPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height/2)
         infoPlane.cornerRadius = infoPlane.width / 25
         
         infoPlane.firstMaterial?.diffuse.contents = spriteKitScene
@@ -92,7 +92,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let infoPlaneNode = SCNNode(geometry: infoPlane)
         infoPlaneNode.eulerAngles.x = -.pi / 2
         infoPlaneNode.opacity = 0.10
-        infoPlaneNode.position.z = -0.06
+        infoPlaneNode.position.z = -0.045
         
         infoPlaneNode.runAction(self.fadeInAction)
         
@@ -127,7 +127,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBAction func longPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
             self.directionsLabel.text = "Scanning..."
-            if (self.foundAnchor){
+            if (self.foundAnchor) {
                 self.foundCard = false
                 let imageFromArkitScene: UIImage? = sceneView.snapshot()
                 self.getText(image: imageFromArkitScene!)
