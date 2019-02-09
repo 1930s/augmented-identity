@@ -1,6 +1,14 @@
 from __future__ import print_function
 from flask import Flask, request, redirect, url_for, render_template, Response, jsonify
 import sys
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
+from bs4 import BeautifulSoup
+
+import urllib.request
+from selenium import webdriver
+from webscrapeTest import *
 
 app = Flask(__name__)
 
@@ -116,6 +124,9 @@ def enterPortfolioData():
         if tmpMajor != "enter your major" and tmpMajor != "":
             major = tmpMajor
         print(request.form, file=sys.stderr)
+        gitInfo = getDetails (github)
+        userDict[currentUser][2][0] = gitInfo[0]
+        userDict[currentUser][2][1] = gitInfo[1]
         userDict[currentUser][2][2] = github
         userDict[currentUser][3] = facebook
         userDict[currentUser][4] = linkedIn
@@ -149,5 +160,5 @@ def editPortfolioButton():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.173.66')
+    app.run(debug=True, host='128.237.168.24')
 

@@ -41,9 +41,9 @@ def getDetails (url):
         for p in html.select ('p'):
             if p.has_attr('class') and ('pinned-repo-desc' in p['class']):
                 d [key] = p.text.strip()
-                return d
-        return ("no pinned repositories")
+                return list(d) + [(d[key])]
+        return ["no pinned repositories", None]
 
 
 
-print (getDetails ("https://www.linkedin.com/in/-sophia-lau-"))
+print (getDetails ("https://github.com/EdwardLu2018"))
