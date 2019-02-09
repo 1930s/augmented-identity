@@ -23,19 +23,40 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="QEf-WD-D0R" appends="YES" id="vk6-EP-dsF"/>
+                                    <outletCollection property="gestureRecognizers" destination="JlL-av-Dte" appends="YES" id="HBL-4d-d7x"/>
                                 </connections>
                             </arscnView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold ID In Front Of Camera &amp; Press" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaG-G3-wsS">
+                                <rect key="frame" x="12" y="30" width="351" height="30"/>
+                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="JnY-ms-C5y"/>
+                                    <constraint firstAttribute="width" constant="350" id="doB-m2-jSC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="03U-Ai-dcF"/>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="98i-ms-wHy"/>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="I6h-wS-66s"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FaG-G3-wsS" secondAttribute="trailing" constant="12" id="IIi-TO-Nul"/>
+                            <constraint firstItem="FaG-G3-wsS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="NJq-9W-T6f"/>
+                            <constraint firstItem="FaG-G3-wsS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="h0X-xl-gsU"/>
                             <constraint firstItem="Ita-2U-a4c" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qkb-Ir-342"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="directions" destination="FaG-G3-wsS" id="mYz-wq-3gX"/>
                         <outlet property="sceneView" destination="Ita-2U-a4c" id="ndf-LB-4eO"/>
                     </connections>
                 </viewController>
@@ -45,6 +66,7 @@
                         <action selector="longPress:" destination="BYZ-38-t0r" id="Aoc-Ad-fu0"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="JlL-av-Dte"/>
             </objects>
             <point key="canvasLocation" x="40.799999999999997" y="25.637181409295355"/>
         </scene>
