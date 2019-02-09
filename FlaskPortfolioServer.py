@@ -24,7 +24,9 @@ def register():
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
-    if request.form ['button'] != "Or Login" and userName != "" and password != "" and password == confirm:
+    if request.method == "POST":
+        print (request.form, file = sys.stderr)
+    if request.form ['button'] == "Register" and userName != "" and password != "" and password == confirm:
         userDict [userName] = password
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
@@ -94,9 +96,14 @@ def viewData():
     return render_template("ViewPortfolioData.html")
 
 @app.route("/viewData", methods=["POST", "GET"])
-def clickEdit():
-    return redirect("/enterPortfolioScreen")
+def placeDatainTable ():
+    print (request.get_json())
+    return jsonify ({request.get_json()})
+    
+
+# def clickEdit():
+#     return redirect("/enterPortfolioScreen")
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.173.66')
+    app.run(debug=True, host='128.237.168.24')
 
