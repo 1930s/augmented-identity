@@ -95,24 +95,7 @@ def enterPortfolioData():
         return render_template("ViewPortfolioData.html", result = request.form)
 
 
-# @app.route("/viewData/<linkedIn>")
-# def viewData(linkedIn):
-#     return render_template("ViewPortfolioData.html", linkedIn = linkedIn)
-    
-# 
-# @app.route("/viewData", methods=["POST", "GET"])
-# def placeDataInTable ():
-#     ## i dont think we actually need frikin global variables i think it is all stored on the server somehow...
-#     if reques.method == "POST":
-#          return redirect("/enterPortfolioScreen")
-#     if request.method = "GET":
-#         git = request.args.get('Github')
-#         return (redirect (url_for('')
-#     print (request.get_json())
-#     return jsonify ({request.get_json()})
-#     
-
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.173.66')
+    app.run(debug=True, host='128.237.168.24')
 
