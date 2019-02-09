@@ -63,7 +63,7 @@ def Continue():
 #loads the enter portfolio template
 @app.route("/enterPortfolioScreen")
 def enterDataScreen():
-    return render_template("EnterPortfolioInformation.html")
+    return render_template("PrettyPortfolioInformation.html")
 
 #retrieves the linkes and stores it with users
 @app.route("/enterPortfolioScreen", methods = ["POST", "GET"])
@@ -105,5 +105,5 @@ def placeDatainTable ():
 #     return redirect("/enterPortfolioScreen")
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.168.24')
+    app.run(debug=True, host='128.237.173.66')
 
