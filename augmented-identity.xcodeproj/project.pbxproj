@@ -13,7 +13,6 @@
 		2BEE6151220EBF5E00321E18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6150220EBF5E00321E18 /* Assets.xcassets */; };
 		2BEE6154220EBF5E00321E18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6152220EBF5E00321E18 /* LaunchScreen.storyboard */; };
 		2BEE615C220EC08800321E18 /* card-info.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE615B220EC08800321E18 /* card-info.sks */; };
-		2BEE615E220EC49B00321E18 /* HTTPRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEE615D220EC49B00321E18 /* HTTPRequests.swift */; };
 		2BEE6162220EC69E00321E18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6161220EC69E00321E18 /* GoogleService-Info.plist */; };
 		2BEE6164220ED97800321E18 /* github.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6163220ED97800321E18 /* github.sks */; };
 		2BEE6166220EDFF000321E18 /* facebook.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6165220EDFF000321E18 /* facebook.sks */; };
@@ -34,7 +33,6 @@
 		2BEE6153220EBF5E00321E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BEE6155220EBF5E00321E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BEE615B220EC08800321E18 /* card-info.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "card-info.sks"; sourceTree = "<group>"; };
-		2BEE615D220EC49B00321E18 /* HTTPRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequests.swift; sourceTree = "<group>"; };
 		2BEE6161220EC69E00321E18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2BEE6163220ED97800321E18 /* github.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = github.sks; sourceTree = "<group>"; };
 		2BEE6165220EDFF000321E18 /* facebook.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = facebook.sks; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			children = (
 				2BEE6149220EBF5A00321E18 /* AppDelegate.swift */,
 				2BEE614B220EBF5B00321E18 /* ViewController.swift */,
-				2BEE615D220EC49B00321E18 /* HTTPRequests.swift */,
 				2BEE616D220F316100321E18 /* skills.sks */,
 				2BEE615B220EC08800321E18 /* card-info.sks */,
 				2BEE6163220ED97800321E18 /* github.sks */,
@@ -278,7 +275,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BEE615E220EC49B00321E18 /* HTTPRequests.swift in Sources */,
 				2BEE614C220EBF5B00321E18 /* ViewController.swift in Sources */,
 				2BEE614A220EBF5A00321E18 /* AppDelegate.swift in Sources */,
 			);

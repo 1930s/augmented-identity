@@ -11,6 +11,7 @@ import ARKit
 import SpriteKit
 import Foundation
 import Firebase
+import Alamofire
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
@@ -28,15 +29,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     let LIScene: SKScene = SKScene(fileNamed: "linkedIn")!
     let personalScene: SKScene = SKScene(fileNamed: "personal")!
     
-    var gitLink: String = "https://github.com/EdwardLu2018/augmented-identity"
-    var FBLink: String = "https://www.facebook.com/zuck"
-    var LInk: String = "https://www.linkedin.com/in/edwardllu"
-    var personalLink: String = "https://www.google.com/imgres?imgurl=http://www.gstatic.com/tv/thumb/v22vodart/27575/p27575_v_v8_aa.jpg&imgrefurl=http://google.com/search?tbm%3Disch%26q%3DShrek&h=1440&w=960&tbnid=sQODbxTLi36s2M:&q=shrek&tbnh=186&tbnw=124&usg=AI4_-kSZ8mfpphwn7-oeUlXHj9c0XuqM0g&vet=12ahUKEwjNqvKquq7gAhULtlkKHb1-D2IQ_B0wIXoECAEQBg..i&docid=iFY1YbgDJQohPM&itg=1&sa=X&ved=2ahUKEwjNqvKquq7gAhULtlkKHb1-D2IQ_B0wIXoECAEQBg"
+    var gitTitle: String = ""
+    var gitDescript: String = ""
+    var gitLink: String = ""
+    var FBLink: String = ""
+    var LInk: String = ""
+    var personalLink: String = ""
+    
+    var skills = [String]()
     
     var foundCard: Bool = false
     var foundAnchor: Bool = false
-    var name: String = "[name]"
-    var major: String = "[major]"
+    var name: String = "Press And Hold"
+    var major: String = "To Scan Card"
+    
+    var skill1: String = ""
+    var skill2: String = ""
+    var skill3: String = ""
+    var skill4: String = ""
+    var skill5: String = ""
     
     let fadeDuration: TimeInterval = 7
     let moveDuration: TimeInterval = 5
@@ -97,9 +108,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let referenceImage = imageAnchor.referenceImage
         self.foundAnchor = true
         
-        // Card Information Label
         if let nameLabel = cardInfoScene.childNode(withName: "name") as? SKLabelNode {
             nameLabel.text = self.name
+        }
+        if let nameLabel = cardInfoScene.childNode(withName: "major") as? SKLabelNode {
+            nameLabel.text = self.major
         }
         
         let infoPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height * 0.6)
@@ -120,6 +133,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         node.addChildNode(infoPlaneNode)
         
         if (self.foundCard) {
+            if let skill1Label = skillsScene.childNode(withName: "skill1") as? SKLabelNode {
+                skill1Label.text = self.skill1
+            }
+            if let skill2Label = skillsScene.childNode(withName: "skill2") as? SKLabelNode {
+                skill2Label.text = self.skill2
+            }
+            if let skill3Label = skillsScene.childNode(withName: "skill3") as? SKLabelNode {
+                skill3Label.text = self.skill3
+            }
+            if let skill4Label = skillsScene.childNode(withName: "skill4") as? SKLabelNode {
+                skill4Label.text = self.skill4
+            }
+            if let skill5Label = skillsScene.childNode(withName: "skill5") as? SKLabelNode {
+                skill5Label.text = self.skill5
+            }
+            
             let skillsPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height * 3.15)
             skillsPlane.cornerRadius = skillsPlane.width / 25
             
@@ -137,6 +166,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             skillsPlaneNode.runAction(self.fadeInAction)
             
             node.addChildNode(skillsPlaneNode)
+            
+            if let gitTitleLabel = gitInfoScene.childNode(withName: "projectName") as? SKLabelNode {
+                gitTitleLabel.text = self.gitTitle
+            }
+            
+            if let gitDescriptionLabel = gitInfoScene.childNode(withName: "projectDescription") as? SKLabelNode {
+                gitDescriptionLabel.text = self.gitDescript
+            }
             
             let gitPlane = SCNPlane(width: 0.015, height: 0.015)
             gitPlane.cornerRadius = 4.5
@@ -245,12 +282,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             guard error == nil, let result = result else { return }
             
             if (result.text.contains("University") || result.text.contains("Student") || result.text.contains("UserID")) {
-                if let lowerRange = result.text.range(of: "University"),
-                    let upperRange = result.text.range(of: " Student") {
-                    let name = result.text[lowerRange.upperBound...upperRange.lowerBound]
-                    self.name = String(name)
+                if let lowerRange = result.text.range(of: "University\n"),
+                   let upperRange = result.text.range(of: " Student") {
+                    self.name =  String(result.text[lowerRange.upperBound...upperRange.lowerBound])
+                    self.name = self.name.trimmingCharacters(in: .whitespaces)
                     self.foundCard = true
-                    // sendAndReceiveFromServer(params: ["andrewID": self.name], url: "http://128.237.171.224:5000/tasks")
+                    self.sendAndReceiveFromServer(params: ["name": self.name], url: "http://128.237.219.51:5000/tasks")
                     self.directionsLabel.text = "Name Recognized!"
                 }
             }
@@ -279,20 +316,60 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let tappedNode = hitResults[0].node
             print(tappedNode.name!)
             if (tappedNode.name == "gitNode") {
+                if (self.gitPressed){
+                    UIApplication.shared.openURL(NSURL(string: self.gitLink)! as URL)
+                }
                 self.gitPressed = true
             }
-            else if (tappedNode.name == "gitInfoNode"){
-                UIApplication.shared.openURL(NSURL(string: gitLink)! as URL)
-            }
             else if (tappedNode.name == "FBNode") {
-                UIApplication.shared.openURL(NSURL(string: FBLink)! as URL)
+                UIApplication.shared.openURL(NSURL(string: self.FBLink)! as URL)
             }
             else if (tappedNode.name == "LINode") {
-                UIApplication.shared.openURL(NSURL(string: LInk)! as URL)
+                UIApplication.shared.openURL(NSURL(string: self.LInk)! as URL)
             }
             else if (tappedNode.name == "personalNode") {
-                UIApplication.shared.openURL(NSURL(string: personalLink)! as URL)
+                UIApplication.shared.openURL(NSURL(string: self.personalLink)! as URL)
             }
         }
-    }    
+    }
+    
+    func sendAndReceiveFromServer(params : Dictionary<String, String>, url : String) {
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON { response in
+                print(response)
+                //to get status code
+                if let status = response.response?.statusCode {
+                    switch(status){
+                    case 201:
+                        print("example success")
+                    default:
+                        print("error with response status: \(status)")
+                    }
+                }
+                //to get JSON return value
+                if let result = response.result.value {
+                    let JSONDict = result as! NSDictionary
+                    let JSONArr: NSArray = Array(JSONDict)[0].value as! NSArray
+                    
+                    let gitArr: NSArray = JSONArr[2] as! NSArray
+                    self.gitTitle = gitArr[0] as! String
+                    self.gitDescript = gitArr[1] as! String
+                    self.gitLink = gitArr[2] as! String
+
+                    self.FBLink = JSONArr[3] as! String
+                    self.LInk = JSONArr[4] as! String
+                    self.personalLink = JSONArr[5] as! String
+                    
+                    let skills = JSONArr[6] as! NSArray
+                    self.skill1 = skills[0] as! String
+                    self.skill2 = skills[1] as! String
+                    self.skill3 = skills[2] as! String
+                    self.skill4 = skills[3] as! String
+                    self.skill5 = skills[4] as! String
+                    
+                    self.major = JSONArr[7] as! String
+                }
+        }
+    }
+
 }
