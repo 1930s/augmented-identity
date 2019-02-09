@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> You have registered </title>
+</head>
+<body>
+	<p>
+		You have successfully registered. Click 'continue' to input your information.
+	</p>
+	<button onclick="nextPage()"> continue</button>
+<script>
+	function nextPage() {
+		$.ajax({
+		type: "POST",
+		url: "{{ url_for("finishedRegistration") }}",
+		contentType: "application/json",
+		data: JSON.stringify(true),
+		dataType: "json"
+		});
+	}
+</script>
+</body>
+</html>
