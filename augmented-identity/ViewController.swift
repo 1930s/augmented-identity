@@ -314,6 +314,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         if hitResults.count > 0 {
             let tappedNode = hitResults[0].node
+            print(tappedNode.name!)
             if (tappedNode.name == "gitNode") {
                 if (self.gitPressed){
                     UIApplication.shared.openURL(NSURL(string: self.gitLink)! as URL)
@@ -335,6 +336,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func sendAndReceiveFromServer(params : Dictionary<String, String>, url : String) {
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
+                print(response)
                 //to get status code
                 if let status = response.response?.statusCode {
                     switch(status){
@@ -365,13 +367,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     self.skill4 = skills[3] as! String
                     self.skill5 = skills[4] as! String
                     
-                    if (JSONArr[0] as! String == "") {
-                        self.major = "No Profile"
-                        self.foundCard = false
-                    }
-                    else {
-                        self.major = JSONArr[7] as! String
-                    }
+                    self.major = JSONArr[7] as! String
                 }
         }
     }

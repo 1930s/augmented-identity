@@ -5,7 +5,7 @@ import sys
 app = Flask(__name__)
 
 ##user data
-userDict = {'jkoch': ['james']}
+userDict = {}
 currentUser = None
 personalWebsite = "None"
 github = []
@@ -31,17 +31,25 @@ def register():
     confirm = request.form ['confirmPass']
     if request.form ['button'] == "Register" and fullName != "" and \
                     userName != "" and password != "" and password == confirm:
-        userDict[userName] = [None, None, [None, None, None], None, None, None, None, None]
+        userDict[userName] = ['', '', ['', '', ''], '', '', '', ['', '', '', '', ''], '']
         userDict[userName][0] = fullName
         userDict[userName][1] = password
         currentUser = userName
-        
         print(userDict, file=sys.stderr)
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
         return redirect("/loginPage")
     else:
         return redirect ("/")
+    
+@app.route('/tasks', methods=['POST', "GET"])
+def get():
+    data = request.get_json()
+    name = str(data["name"])
+    for username in userDict:
+        if userDict[username][0] == name:
+            return jsonify(userDict)
+    return jsonify({'':['', '', ["", "",""], '', '', '', ['', '', '', '', ''], ""]})
         
 @app.route("/loginPage")
 def loginTemplate():
@@ -88,7 +96,6 @@ def enterPortfolioData():
     major = None
     global currentUser
     global userDict
-    print (currentUser, file = sys.stderr)
     if request.method == "POST":
         personalWebsiteLink = request.form ["PersonalWebsite"]
         githubLink = request.form ["Github"]
@@ -108,15 +115,14 @@ def enterPortfolioData():
             skills = skillsList
         if tmpMajor != "enter your major" and tmpMajor != "":
             major = tmpMajor
-        print (userDict [currentUser], file = sys.stderr)
+        print(request.form, file=sys.stderr)
         userDict[currentUser][2][2] = github
         userDict[currentUser][3] = facebook
         userDict[currentUser][4] = linkedIn
         userDict[currentUser][5] = personalWebsite
         userDict[currentUser][6] = skills
         userDict[currentUser][7] = major
-        print(request.form, file=sys.stderr)
-        return render_template("PrettyPortfolioSummary.html", result = tupleList(currentUser, userDict))
+        return render_template("PrettyPortfolioSummary.html", result = request.form)
         
 def tupleList(user, dict):
     result = []
@@ -143,5 +149,5 @@ def editPortfolioButton():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.168.24')
+    app.run(debug=True, host='128.237.173.66')
 
