@@ -7,9 +7,10 @@ app = Flask(__name__)
 ##user data
 userDict = {}
 personalWebsite = "None"
-github = "None"
+github = {}
 linkedIn = "None"
 facebook = "None"
+skills = "None"
 
 ##Web pages
 #initial render
@@ -23,18 +24,36 @@ def register():
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
-    if userName != "" and password != "" and password == confirm:
+    if request.form ['button'] != "Or Login" and userName != "" and password != "" and password == confirm:
         userDict [userName] = password
         return redirect("/finishedRegistration")
+    elif request.form ['button'] == "Or Login":
+        return redirect("/loginPage")
     else:
         return redirect ("/")
         
-#redirects the template to the finished registration page
+@app.route("/loginPage")
+def loginTemplate():
+    return render_template("PrettyLoginPage.html")
+
+#login screen, must check if user is in system
+@app.route("/loginPage", methods = ["POST", "GET"])
+def login():
+    username = request.form ['username']
+    password = request.form ['password']
+    if username not in userDict:
+        return redirect("/")
+    elif username in userDict and userDict[username][0] != password:
+        return redirect("/loginPage")
+    else:
+        return redirect("/viewData")
+        
+#redirects the registration page to the finished registration page
 @app.route("/finishedRegistration")
 def finishedRegistration():
     return render_template("finishedRegistration.html")
 
-#continues to the enter data template
+#redirects the finished registration page to the enter portfolio screen
 @app.route("/finishedRegistration", methods = ["POST", "GET"])
 def Continue():
     return redirect("/enterPortfolioScreen")
@@ -51,10 +70,12 @@ def enterPortfolioData():
     global github
     global linkedIn
     global facebook
+    global skills
     personalWebsiteLink = request.form ["PersonalWebsite"]
     githubLink = request.form ["Github"]
     linkedInLink = request.form ["LinkedIn"]
     facebookLink = request.form ["Facebook"]
+    skillsList = request.form ["Skills"]
     if personalWebsiteLink != "enter URL" and personalWebsiteLink != "":
         personalWebsite = personalWebsiteLink
     if githubLink != "enter URL" and githubLink != "":
@@ -63,7 +84,9 @@ def enterPortfolioData():
         linkedIn = linkedInLink
     if facebookLink != "enter URL" and facebookLink != "":
         facebook = facebookLink
-    print([personalWebsite, github, linkedIn, facebook], file=sys.stderr)
+    if skillsList != "enter your skills" and skillsList != "":
+        skills = skillsList
+    print([personalWebsite, github, linkedIn, facebook, skills], file=sys.stderr)
     return redirect("/viewData")
 
 @app.route("/viewData")
