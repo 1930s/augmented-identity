@@ -9,8 +9,9 @@
 <script>
 	$.ajax({
 					    type: "POST",
-					    url: "{{ url_for("ViewData") }}",
+					    url: "{{url_for(" placeDatainTable")}}"
 					    contentType: "application/json",
+					    dataType: "json",
 					    success: function(response) {
 					    	console.log(response);
 					    	
