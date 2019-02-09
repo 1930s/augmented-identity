@@ -21,11 +21,13 @@ def index():
 # when POST method is called from register page
 @app.route("/", methods = ["POST", "GET"])
 def register():
+    fullName = request.form ['fullName']
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
-    if request.form ['button'] == "Register" and userName != "" and password != "" and password == confirm:
-        userDict [userName] = password
+    if request.form ['button'] == "Register" and fullName != "" and userName != "" and password != "" and password == confirm:
+        uerDict[userName][2] = fullName
+        userDict[userName][1] = password
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
         return redirect("/loginPage")
