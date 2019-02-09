@@ -7,7 +7,7 @@ app = Flask(__name__)
 ##user data
 userDict = {'jkoch': ['james']}
 personalWebsite = "None"
-github = {}
+github = []
 linkedIn = "None"
 facebook = "None"
 skills = "None"
@@ -25,8 +25,10 @@ def register():
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
-    if request.form ['button'] == "Register" and fullName != "" and userName != "" and password != "" and password == confirm:
-        uerDict[userName][2] = fullName
+    if request.form ['button'] == "Register" and fullName != "" and \
+                    userName != "" and password != "" and password == confirm:
+        userDict[userName] = [None, None, None, None, None, None, None]
+        userDict[userName][0] = fullName
         userDict[userName][1] = password
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
