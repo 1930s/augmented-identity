@@ -20,7 +20,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var imageFromArkitScene: UIImage?
     
     let cardInfoScene: SKScene = SKScene(fileNamed: "card-info")!
+    let skillsScene: SKScene = SKScene(fileNamed: "skills")!
     let gitScene: SKScene = SKScene(fileNamed: "github")!
+    let gitInfoScene: SKScene = SKScene(fileNamed: "GHInfo")!
+    var gitPressed: Bool = false
     let FBScene: SKScene = SKScene(fileNamed: "facebook")!
     let LIScene: SKScene = SKScene(fileNamed: "linkedIn")!
     let personalScene: SKScene = SKScene(fileNamed: "personal")!
@@ -33,21 +36,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var foundCard: Bool = false
     var foundAnchor: Bool = false
     var name: String = "[name]"
+    var major: String = "[major]"
     
-    let fadeDuration: TimeInterval = 5
-    let waitDuration: TimeInterval = 1
+    let fadeDuration: TimeInterval = 7
+    let moveDuration: TimeInterval = 5
     
-    lazy var fadeAction: SCNAction = {
+    lazy var fadeOutAction: SCNAction = {
         return .sequence([
-            .fadeOpacity(by: 0.5, duration: fadeDuration),
-            .wait(duration: waitDuration),
-            .fadeOut(duration: fadeDuration)
+            .fadeOpacity(by: -1, duration: fadeDuration)
             ])
     }()
     
     lazy var fadeInAction: SCNAction = {
         return .sequence([
             .fadeOpacity(by: 0.9, duration: fadeDuration)
+            ])
+    }()
+    
+    lazy var move: SCNAction = {
+        return .sequence([
+            .moveBy(x: 1, y: 0, z: 0, duration: moveDuration)
             ])
     }()
     
@@ -94,7 +102,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             nameLabel.text = self.name
         }
         
-        let infoPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height/2)
+        let infoPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height * 0.6)
         infoPlane.cornerRadius = infoPlane.width / 25
         
         infoPlane.firstMaterial?.diffuse.contents = cardInfoScene
@@ -105,13 +113,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         infoPlaneNode.name = "infoPlaneNode"
         infoPlaneNode.eulerAngles.x = -.pi / 2
         infoPlaneNode.opacity = 0.10
-        infoPlaneNode.position.z = -0.046
+        infoPlaneNode.position.z = -0.048
         
         infoPlaneNode.runAction(self.fadeInAction)
         
         node.addChildNode(infoPlaneNode)
         
         if (self.foundCard) {
+            let skillsPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height * 3.15)
+            skillsPlane.cornerRadius = skillsPlane.width / 25
+            
+            skillsPlane.firstMaterial?.diffuse.contents = skillsScene
+            skillsPlane.firstMaterial?.isDoubleSided = true
+            skillsPlane.firstMaterial?.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
+            
+            let skillsPlaneNode = SCNNode(geometry: skillsPlane)
+            skillsPlaneNode.name = "skillsNode"
+            skillsPlaneNode.eulerAngles.x = -.pi / 2
+            skillsPlaneNode.opacity = 0.10
+            skillsPlaneNode.position.z = 0.0216
+            skillsPlaneNode.position.x = 0.093
+            
+            skillsPlaneNode.runAction(self.fadeInAction)
+            
+            node.addChildNode(skillsPlaneNode)
+            
             let gitPlane = SCNPlane(width: 0.015, height: 0.015)
             gitPlane.cornerRadius = 4.5
             
@@ -129,6 +155,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             gitPlaneNode.runAction(self.fadeInAction)
             
             node.addChildNode(gitPlaneNode)
+            
+            let gitInfoPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height)
+            gitInfoPlane.cornerRadius = gitInfoPlane.width / 25
+        
+            gitInfoPlane.firstMaterial?.diffuse.contents = gitInfoScene
+            gitInfoPlane.firstMaterial?.isDoubleSided = true
+            gitInfoPlane.firstMaterial?.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
+        
+            let gitInfoPlaneNode = SCNNode(geometry: gitInfoPlane)
+            gitInfoPlaneNode.name = "gitInfoNode"
+            gitInfoPlaneNode.eulerAngles.x = -.pi / 2
+            gitInfoPlaneNode.opacity = 0.10
+            gitInfoPlaneNode.position.z = Float(0.052 + (gitInfoPlane.height / 2.0))
+            
+            if (self.gitPressed) {
+                gitInfoPlaneNode.runAction(self.fadeInAction)
+                
+                node.addChildNode(gitInfoPlaneNode)
+            }
             
             let FBPlane = SCNPlane(width: 0.015, height: 0.015)
             FBPlane.cornerRadius = 4.5
@@ -159,7 +204,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             LIPlaneNode.name = "LINode"
             LIPlaneNode.eulerAngles.x = -.pi / 2
             LIPlaneNode.opacity = 0.10
-            LIPlaneNode.position.x = 0.009
+            LIPlaneNode.position.x = 0.010
             LIPlaneNode.position.z = 0.040
             
             LIPlaneNode.runAction(self.fadeInAction)
@@ -177,7 +222,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             personalPlaneNode.name = "personalNode"
             personalPlaneNode.eulerAngles.x = -.pi / 2
             personalPlaneNode.opacity = 0.10
-            personalPlaneNode.position.x = 0.031
+            personalPlaneNode.position.x = 0.032
             personalPlaneNode.position.z = 0.040
             
             personalPlaneNode.runAction(self.fadeInAction)
@@ -205,6 +250,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     let name = result.text[lowerRange.upperBound...upperRange.lowerBound]
                     self.name = String(name)
                     self.foundCard = true
+                    // sendAndReceiveFromServer(params: ["andrewID": self.name], url: "http://128.237.171.224:5000/tasks")
                     self.directionsLabel.text = "Name Recognized!"
                 }
             }
@@ -233,6 +279,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             let tappedNode = hitResults[0].node
             print(tappedNode.name!)
             if (tappedNode.name == "gitNode") {
+                self.gitPressed = true
+            }
+            else if (tappedNode.name == "gitInfoNode"){
                 UIApplication.shared.openURL(NSURL(string: gitLink)! as URL)
             }
             else if (tappedNode.name == "FBNode") {
@@ -241,11 +290,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             else if (tappedNode.name == "LINode") {
                 UIApplication.shared.openURL(NSURL(string: LInk)! as URL)
             }
-            else if (tappedNode.name == "PersonalNode") {
-                UIApplication.shared.openURL(NSURL(string: LInk)! as URL)
+            else if (tappedNode.name == "personalNode") {
+                UIApplication.shared.openURL(NSURL(string: personalLink)! as URL)
             }
         }
-    }
-    
+    }    
 }
-

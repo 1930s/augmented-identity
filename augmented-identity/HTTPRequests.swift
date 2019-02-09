@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-func getRequestWithAlamofire(params : Dictionary<String, String>, url : String){
+func sendAndReceiveFromServer(params : Dictionary<String, String>, url : String) {
     Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
         .responseJSON { response in
             print(response)
