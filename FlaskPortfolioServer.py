@@ -6,11 +6,13 @@ app = Flask(__name__)
 
 ##user data
 userDict = {'jkoch': ['james']}
+currentUser = None
 personalWebsite = "None"
 github = []
 linkedIn = "None"
 facebook = "None"
 skills = "None"
+major = "None"
 
 ##Web pages
 #initial render
@@ -21,15 +23,20 @@ def index():
 # when POST method is called from register page
 @app.route("/", methods = ["POST", "GET"])
 def register():
+    global userDict
+    global currentUser
     fullName = request.form ['fullName']
     userName = request.form ['user']
     password = request.form ['pass']
     confirm = request.form ['confirmPass']
     if request.form ['button'] == "Register" and fullName != "" and \
                     userName != "" and password != "" and password == confirm:
-        userDict[userName] = [None, None, None, None, None, None, None]
+        userDict[userName] = [None, None, None, None, None, None, None, None]
         userDict[userName][0] = fullName
         userDict[userName][1] = password
+        currentUser = userName
+        
+        print(userDict, file=sys.stderr)
         return redirect("/finishedRegistration")
     elif request.form ['button'] == "Or Login":
         return redirect("/loginPage")
@@ -43,14 +50,17 @@ def loginTemplate():
 #login screen, must check if user is in system
 @app.route("/loginPage", methods = ["POST", "GET"])
 def login():
-    username = request.form ['username']
+    global userDict
+    global currentUser
+    userName = request.form ['username']
     password = request.form ['password']
-    if username not in userDict:
+    if userName not in userDict:
         return redirect("/")
-    elif username in userDict and userDict[username][0] != password:
+    elif userName in userDict and userDict[userName][1] != password:
         return redirect("/loginPage")
     else:
-        return redirect("/viewData")
+        currentUser = userName
+        return redirect("/viewPortfolio")
         
 #redirects the registration page to the finished registration page
 @app.route("/finishedRegistration")
@@ -75,12 +85,14 @@ def enterPortfolioData():
     linkedIn = None
     facebook = None
     skills = None
+    major = None
     if request.method == "POST":
         personalWebsiteLink = request.form ["PersonalWebsite"]
         githubLink = request.form ["Github"]
         linkedInLink = request.form ["LinkedIn"]
         facebookLink = request.form ["Facebook"]
         skillsList = request.form ["Skills"]
+        tmpMajor = request.form ["Major"]
         if personalWebsiteLink != "enter URL" and personalWebsiteLink != "":
             personalWebsite = personalWebsiteLink
         if githubLink != "enter URL" and githubLink != "":
@@ -91,8 +103,32 @@ def enterPortfolioData():
             facebook = facebookLink
         if skillsList != "enter your skills" and skillsList != "":
             skills = skillsList
-        print([personalWebsite, github, linkedIn, facebook, skills], file=sys.stderr)
-        return render_template("ViewPortfolioData.html", result = request.form)
+        if tmpMajor != "enter your major" and tmpMajor != "":
+            major = tmpMajor
+        print(request.form, file=sys.stderr)
+        return render_template("PrettyPortfolioSummary.html", result = request.form)
+        
+def tupleList(user, dict):
+    result = []
+    if userDict[user][2] != None:
+        result.append(("Github", dict[user][2][2]))
+    else:
+        result.append(("Github", "None"))
+    result.append(("Facebook", dict[user][3]))
+    result.append(("LinkedIn", dict[user][4]))
+    result.append(("Personal", dict[user][5]))
+    result.append(("Skills", dict[user][6]))
+    result.append(("Major", dict[user][7]))
+    return result
+        
+        
+@app.route("/viewPortfolio")
+def showPortfolio():
+    return render_template("PrettyPortfolioSummary.html", result = tupleList(currentUser, userDict))
+
+@app.route("/viewPortfolio", methods=["POST", "GET"])
+def editPortfolioButton():
+    return redirect("PrettyPortfolioSummary.html")
 
 
 # @app.route("/viewData/<linkedIn>")
