@@ -7,13 +7,29 @@
 	</title>
 </head>
 <body>
+
+	<script>
+		$.ajax({
+	    type: "POST",
+	    url: "{{ url_for("registerPageOffish") }}",
+	    contentType: "application/json",
+	    data: JSON.stringify({currWord:window.mySelection}),
+	    dataType: "json",
+	    success: function(response) {
+	    	console.log(response.synList);
+	    	if (response.currWord != 0){
+	    		word = response.currWord;
+	    		defList = response.defList;
+	    		synDict = response.synList;
+	</script>
+
 <center>
 	<form method = "POST" >
   	Username: <input type="text" name="user"><br>
   	Password: <input type="password" name="pass"><br>
   	Confirm Password: <input type="text" name="confirmPass"><br>
-  	<input name = "button" type = "submit" value = "Register">
-  	<input name = "button" type = "submit" value = "Or Login">
+  	<input type = "submit">
+  	<input type = "submit">
   	</form>
 </center>
 
