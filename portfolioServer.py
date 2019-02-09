@@ -12,7 +12,7 @@ facebook = "None"
 #initial render
 @app.route('/')
 def index():
-    return render_template("EnterPortfolioInformationJames.html")
+    return render_template("EnterPortfolioInformation.html")
     
 # when POST method is called from website for saving links
 @app.route("/", methods = ["POST", "GET"])

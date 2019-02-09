@@ -1,0 +1,6 @@
+TASKS
+Register Page
+-add sign in option
+Portfolio Page
+-add page after saving data that shows your current data and gives you the 	option to edit it
+-also link this page to after logging in
