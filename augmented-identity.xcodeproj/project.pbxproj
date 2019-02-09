@@ -12,6 +12,7 @@
 		2BEE614F220EBF5B00321E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE614D220EBF5B00321E18 /* Main.storyboard */; };
 		2BEE6151220EBF5E00321E18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6150220EBF5E00321E18 /* Assets.xcassets */; };
 		2BEE6154220EBF5E00321E18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE6152220EBF5E00321E18 /* LaunchScreen.storyboard */; };
+		2BEE615C220EC08800321E18 /* card-info.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BEE615B220EC08800321E18 /* card-info.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		2BEE6150220EBF5E00321E18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BEE6153220EBF5E00321E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BEE6155220EBF5E00321E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BEE615B220EC08800321E18 /* card-info.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "card-info.sks"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				2BEE6149220EBF5A00321E18 /* AppDelegate.swift */,
 				2BEE614B220EBF5B00321E18 /* ViewController.swift */,
+				2BEE615B220EC08800321E18 /* card-info.sks */,
 				2BEE614D220EBF5B00321E18 /* Main.storyboard */,
 				2BEE6150220EBF5E00321E18 /* Assets.xcassets */,
 				2BEE6152220EBF5E00321E18 /* LaunchScreen.storyboard */,
@@ -125,6 +128,7 @@
 				2BEE6154220EBF5E00321E18 /* LaunchScreen.storyboard in Resources */,
 				2BEE6151220EBF5E00321E18 /* Assets.xcassets in Resources */,
 				2BEE614F220EBF5B00321E18 /* Main.storyboard in Resources */,
+				2BEE615C220EC08800321E18 /* card-info.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
