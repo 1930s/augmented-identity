@@ -94,9 +94,14 @@ def viewData():
     return render_template("ViewPortfolioData.html")
 
 @app.route("/viewData", methods=["POST", "GET"])
-def clickEdit():
-    return redirect("/enterPortfolioScreen")
+def placeDatainTable ():
+    print (request.get_json())
+    return jsonify ({request.get_json()})
+    
+
+# def clickEdit():
+#     return redirect("/enterPortfolioScreen")
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.173.66')
+    app.run(debug=True, host='128.237.168.24')
 

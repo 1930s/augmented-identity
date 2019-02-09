@@ -6,6 +6,16 @@
 </header>
 <body>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script>
+	$.ajax({
+					    type: "POST",
+					    url: "{{ url_for("ViewData") }}",
+					    contentType: "application/json",
+					    success: function(response) {
+					    	console.log(response);
+					    	
+}})
+</script>
 	<div>
 	<ol>
 <center>

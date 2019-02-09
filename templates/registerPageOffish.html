@@ -7,22 +7,6 @@
 	</title>
 </head>
 <body>
-
-	<script>
-		$.ajax({
-	    type: "POST",
-	    url: "{{ url_for("registerPageOffish") }}",
-	    contentType: "application/json",
-	    data: JSON.stringify({currWord:window.mySelection}),
-	    dataType: "json",
-	    success: function(response) {
-	    	console.log(response.synList);
-	    	if (response.currWord != 0){
-	    		word = response.currWord;
-	    		defList = response.defList;
-	    		synDict = response.synList;
-	</script>
-
 <center>
 	<form method = "POST" >
   	Username: <input type="text" name="user"><br>
