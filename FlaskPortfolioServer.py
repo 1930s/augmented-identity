@@ -101,7 +101,7 @@ def enterPortfolioData():
         githubLink = request.form ["Github"]
         linkedInLink = request.form ["LinkedIn"]
         facebookLink = request.form ["Facebook"]
-        skillsList = request.form ["Skills"]
+        skillsList = request.form ["Skills"].split(", ")
         tmpMajor = request.form ["Major"]
         if personalWebsiteLink != "enter URL" and personalWebsiteLink != "":
             personalWebsite = personalWebsiteLink
