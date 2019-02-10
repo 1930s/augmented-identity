@@ -1,1 +1,0 @@
-Create dictionary of users and their information
