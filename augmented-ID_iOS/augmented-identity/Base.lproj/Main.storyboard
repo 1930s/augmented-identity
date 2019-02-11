@@ -27,11 +27,11 @@
                                 </connections>
                             </arscnView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold ID In Front Of Camera &amp; Press" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSa-DS-IYv">
-                                <rect key="frame" x="12" y="35" width="350" height="24"/>
+                                <rect key="frame" x="37.5" y="37" width="300" height="25"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="4kx-De-Efk"/>
-                                    <constraint firstAttribute="height" constant="24" id="g4M-HR-Pjx"/>
+                                    <constraint firstAttribute="width" constant="300" id="tXW-H3-kRV"/>
+                                    <constraint firstAttribute="height" constant="25" id="vcZ-pT-TkF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -45,12 +45,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eF2-a4-hCw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5D5-hd-m8F"/>
-                            <constraint firstItem="eF2-a4-hCw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7KD-qF-HB9"/>
-                            <constraint firstItem="eF2-a4-hCw" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Zrp-Fk-0Fo"/>
-                            <constraint firstItem="jSa-DS-IYv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="cIx-68-iyY"/>
-                            <constraint firstItem="eF2-a4-hCw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gL9-EB-ddQ"/>
-                            <constraint firstItem="jSa-DS-IYv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="vSK-hq-MAe"/>
+                            <constraint firstItem="jSa-DS-IYv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2KF-at-X3E"/>
+                            <constraint firstItem="eF2-a4-hCw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EJ2-9E-8eT"/>
+                            <constraint firstItem="jSa-DS-IYv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="17" id="Khj-fn-iC4"/>
+                            <constraint firstItem="eF2-a4-hCw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="VZV-2o-KoC"/>
+                            <constraint firstItem="eF2-a4-hCw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pXf-WP-py0"/>
+                            <constraint firstItem="eF2-a4-hCw" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="sEN-fd-1tW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

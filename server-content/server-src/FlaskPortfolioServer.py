@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 import urllib.request
 from selenium import webdriver
-from webscrapeTest import *
+from webscrape import *
 
 app = Flask(__name__)
 
