@@ -45,7 +45,7 @@ def register():
         currentUser = userName
         print(userDict, file=sys.stderr)
         return redirect("/finishedRegistration")
-    elif request.form ['button'] == "Or Login":
+    elif request.form ['button'] == "Login":
         return redirect("/loginPage")
     else:
         return redirect ("/")
