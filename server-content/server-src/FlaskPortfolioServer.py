@@ -51,7 +51,7 @@ def register():
         return redirect ("/")
     
 @app.route('/tasks', methods=['POST', "GET"])
-def get():
+def get_data_from_app():
     global currentUser
     data = request.get_json()
     name = str(data["name"])
