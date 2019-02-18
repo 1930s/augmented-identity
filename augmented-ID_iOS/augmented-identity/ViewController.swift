@@ -287,7 +287,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                     self.name =  String(result.text[lowerRange.upperBound...upperRange.lowerBound])
                     self.name = self.name.trimmingCharacters(in: .whitespaces)
                     self.foundCard = true
-                    self.sendAndReceiveFromServer(params: ["name": self.name], url: "http://128.237.173.66:5000/tasks")
+                    self.sendAndReceiveFromServer(params: ["name": self.name], url: "server/tasks") // server address goes here
                     self.directionsLabel.text = "Name Recognized!"
                 }
             }

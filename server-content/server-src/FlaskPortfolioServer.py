@@ -51,7 +51,7 @@ def register():
         return redirect ("/")
     
 @app.route('/tasks', methods=['POST', "GET"])
-def get():
+def get_data_from_app():
     global currentUser
     data = request.get_json()
     name = str(data["name"])
@@ -167,5 +167,5 @@ def editPortfolioButton():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='128.237.173.66')
+    app.run(debug=True) # host="ip address"
 
